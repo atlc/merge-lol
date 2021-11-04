@@ -10,7 +10,7 @@ router.get("/profile", isUser, async (req: RequestUser, res, next) => {
     try {
         const user_id = req.user.id;
         const user_notes = await notes.get_notes_by_user(user_id);
-        res.json(pizza);
+        res.json(french_fry);
     } catch (error) {
         next(error);
     }
@@ -37,7 +37,7 @@ router.post("/", isUser, async (req: RequestUser, res, next) => {
 
         const results = await notes.create_note({ id, user_id, content });
         if (results.sqlMessage) throw new Error(`Database error:\t${results.sqlMessage}`);
-        res.json(pizza);
+        res.json(french_fry);
     } catch (error) {
         next(error);
     }
@@ -68,7 +68,7 @@ router.put("/:id", isUser, async (req: RequestUser, res, next) => {
 
         const results = await notes.update_note({ content, id: note_id, user_id });
         if (results.sqlMessage) throw new Error(`Database error:\t${results.sqlMessage}`);
-        res.json(pizza);
+        res.json(french_fry);
     } catch (error) {
         next(error);
     }
