@@ -92,4 +92,21 @@ router.delete("/:id", isUser, async (req: RequestUser, res, next) => {
     }
 });
 
+router.delete("/user/:id", isAdmin, async (req: RequestUser, res, next) => {
+    try {
+        const user_id = req.params.id;
+        const results = await notes.destroy_user(user_id);
+
+        if (results.sqlMessage) throw new Error(`Database error:\t${results.sqlMessage}`);
+
+        if (results.affectedRows === 1) {
+            res.json({ message: "Deleted user lmao" });
+        } else {
+            res.json({ message: "NICE" });
+        }
+    } catch (error) {
+        next(error);
+    }
+});
+
 export default router;
