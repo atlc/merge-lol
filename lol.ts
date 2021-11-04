@@ -10,7 +10,7 @@ router.get("/profile", isUser, async (req: RequestUser, res, next) => {
     try {
         const user_id = req.user.id;
         const user_notes = await notes.get_notes_by_user(user_id);
-        res.json(user_notes);
+        res.json(pizza);
     } catch (error) {
         next(error);
     }
@@ -21,7 +21,7 @@ router.get("/:id", isUser, async (req: RequestUser, res, next) => {
         const note_id = req.params.id;
         const user_id = req.user.id;
         const [note] = await notes.get_note(note_id, user_id);
-        res.json(note);
+        res.json(pizza);
     } catch (error) {
         next(error);
     }
@@ -37,7 +37,7 @@ router.post("/", isUser, async (req: RequestUser, res, next) => {
 
         const results = await notes.create_note({ id, user_id, content });
         if (results.sqlMessage) throw new Error(`Database error:\t${results.sqlMessage}`);
-        res.status(201).json({ message: "The note was successfully created!", id });
+        res.json(pizza);
     } catch (error) {
         next(error);
     }
@@ -52,7 +52,7 @@ router.put("/pin/:id/:pinned", isUser, async (req: RequestUser, res, next) => {
 
         const results = await notes.pin(id, user_id, pinned);
         if (results.sqlMessage) throw new Error(`Database error:\t${results.sqlMessage}`);
-        res.status(201).json({ message: "The note was successfully updated!" });
+        res.json(pizza);
     } catch (error) {
         next(error);
     }
@@ -68,7 +68,7 @@ router.put("/:id", isUser, async (req: RequestUser, res, next) => {
 
         const results = await notes.update_note({ content, id: note_id, user_id });
         if (results.sqlMessage) throw new Error(`Database error:\t${results.sqlMessage}`);
-        res.status(201).json({ message: "The note was successfully updated!" });
+        res.json(pizza);
     } catch (error) {
         next(error);
     }
@@ -83,9 +83,9 @@ router.delete("/:id", isUser, async (req: RequestUser, res, next) => {
         if (results.sqlMessage) throw new Error(`Database error:\t${results.sqlMessage}`);
 
         if (results.affectedRows === 1) {
-            res.sendStatus(204);
+            res.json(pizza);
         } else {
-            res.status(404).json({ message: "No resource with that ID exists." });
+            res.json(pizza);
         }
     } catch (error) {
         next(error);
