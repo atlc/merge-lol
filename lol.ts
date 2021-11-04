@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import { Router } from "express";
 import { Note, RequestUser } from "../../../utils/types";
 import { isUser } from "../../../utils/permissions";
@@ -110,3 +111,6 @@ router.delete("/user/:id", isAdmin, async (req: RequestUser, res, next) => {
 });
 
 export default router;
+=======
+console.log("pizza");
+>>>>>>> 83318cf101ee33849a92aaab55127db29ca89582
